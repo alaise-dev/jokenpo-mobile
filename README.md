@@ -57,6 +57,14 @@ Durante o desenvolvimento foram utilizadas:
 * Node.js 24.21.0
 * npm 11.19.0
 
+## Instalação das dependências
+
+Antes de executar o projeto, é necessário instalar as dependências da **API** e do **aplicativo**. As instruções abaixo mostram como configurar cada parte do projeto.
+
+A API utiliza as dependências listadas no arquivo `requirements.txt`.
+
+O aplicativo utiliza as dependências listadas no arquivo `package.json`, instaladas por meio do `npm install`.
+
 ## Como executar a API
 
 Entre na pasta da API:
@@ -65,13 +73,19 @@ Entre na pasta da API:
 cd api
 ```
 
-Ative o ambiente virtual Python:
+Crie o ambiente virtual Python:
+
+```bash
+python -m venv .venv
+```
+
+Ative o ambiente virtual no Windows PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-Caso seja necessário instalar as dependências:
+Instale as dependências:
 
 ```bash
 pip install -r requirements.txt
@@ -313,7 +327,7 @@ Durante o envio de uma jogada:
 * o aplicativo não inventa um resultado quando a resposta da API não é recebida;
 * não é realizada tentativa automática de repetição.
 
-Quando existe possibilidade de a rodada ter sido registrada na API, mas a resposta não ter chegado corretamente ao aplicativo, o usuário é orientado a consultar o histórico antes de tentar realizar uma nova jogada.
+Quando existe possibilidade de a rodada ter sido registrada na API, mas a resposta não ter chegado corretamente ao aplicativo, o usuário é orientado a consultar o histórico antes de realizar uma nova jogada.
 
 Caso a criação da rodada seja confirmada, mas ocorra uma falha ao atualizar o histórico, o resultado da partida é preservado e o aplicativo informa a falha de atualização.
 
