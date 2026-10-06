@@ -1,599 +1,358 @@
-\# Prova de Programação para Dispositivos Móveis
+# Pedra, Papel e Tesoura
 
+Projeto desenvolvido para a disciplina de **Programação para Dispositivos Móveis**.
 
+A aplicação consiste em um jogo de **Pedra, Papel e Tesoura**, no qual o jogador realiza partidas contra o servidor. O aplicativo se comunica com uma API, que é responsável por escolher a jogada do servidor, calcular o resultado e armazenar as rodadas.
 
-\## Identificação
+O aplicativo também possui uma tela de histórico e um placar com vitórias, derrotas e empates.
 
+## Tecnologias utilizadas
 
+### Aplicativo
 
-Aluno: Alaise Caetano
+* React Native
+* Expo
+* TypeScript
+* Expo Router
 
+### API
 
-Disciplina: Programação para Dispositivos Móveis
+* Python 3.14+
+* FastAPI
+* Uvicorn
 
+### Banco de dados
 
+* SQLite
 
-\## Sobre o projeto
-
-
-
-Este projeto foi desenvolvido para a prova de Programação para Dispositivos Móveis.
-
-
-
-A aplicação é um jogo de \*\*Pedra, Papel e Tesoura\*\*, onde o jogador escolhe uma das três opções e joga contra o servidor.
-
-
-
-Quando o jogador faz uma jogada, o aplicativo envia a escolha para a API. A API escolhe aleatoriamente uma jogada para o servidor, calcula quem venceu e salva a rodada no banco de dados.
-
-
-
-O aplicativo também possui uma tela de histórico, onde é possível visualizar as rodadas que já foram realizadas, e um placar com a quantidade de vitórias, derrotas e empates.
-
-
-
-\## Tecnologias utilizadas
-
-
-
-\### Aplicativo
-
-
-
-\* React Native
-
-\* Expo
-
-\* TypeScript
-
-\* Expo Router
-
-
-
-\### API
-
-
-
-\* Python 3.14.7
-
-\* FastAPI
-
-\* Uvicorn
-
-
-
-\### Banco de dados
-
-
-
-\* SQLite
-
-
-
-\## Estrutura do projeto
-
-
-
-O projeto está dividido em duas partes principais:
-
-
+## Estrutura do projeto
 
 ```text
-
-ProvaMobile/
-
+Jokenpo-Mobile/
 ├── api/
-
+│   ├── database.py
+│   ├── jogos.db
+│   ├── main.py
+│   └── requirements.txt
 ├── app/
-
+│   ├── src/
+│   ├── assets/
+│   ├── package.json
+│   └── ...
 ├── README.md
-
 └── RESPOSTAS.md
-
 ```
 
-
-
-A pasta `api` contém o código da API e o banco de dados.
-
-
+A pasta `api` contém a API e o banco de dados SQLite.
 
 A pasta `app` contém o aplicativo mobile.
 
+O arquivo `RESPOSTAS.md` contém as respostas referentes à parte teórica da avaliação.
 
+## Versões utilizadas
 
-O arquivo `RESPOSTAS.md` contém as respostas da Parte I da prova.
+Durante o desenvolvimento foram utilizadas:
 
+* Python 3.14.7
+* Node.js 24.21.0
+* npm 11.19.0
 
+## Como executar a API
 
-\## Versões utilizadas
+Entre na pasta da API:
 
-
-
-Durante o desenvolvimento foram utilizadas as seguintes versões:
-
-
-
-\* Python 3.14.7
-
-\* Node.js 24.21.0
-
-\* npm 11.19.0
-
-
-
-\## Como executar a API
-
-
-
-Primeiro, abra um terminal e entre na pasta `api`:
-
-
-
-```powershell
-
+```bash
 cd api
-
 ```
 
-
-
-Depois, ative o ambiente virtual:
-
-
+Ative o ambiente virtual Python:
 
 ```powershell
-
-.\\.venv\\Scripts\\Activate.ps1
-
+.\.venv\Scripts\Activate.ps1
 ```
-
-
 
 Caso seja necessário instalar as dependências:
 
-
-
-```powershell
-
+```bash
 pip install -r requirements.txt
-
 ```
 
+Inicie a API:
 
-
-Depois, execute a API:
-
-
-
-```powershell
-
+```bash
 python -m uvicorn main:app --reload
-
 ```
 
-
-
-A API será executada em:
-
-
+A API ficará disponível em:
 
 ```text
-
 http://127.0.0.1:8000
-
 ```
 
-
-
-Também é possível acessar a documentação da API pelo Swagger:
-
-
+A documentação interativa da API pode ser acessada em:
 
 ```text
-
 http://127.0.0.1:8000/docs
-
 ```
 
-
-
-\## Como executar o aplicativo
-
-
+## Como executar o aplicativo
 
 Em outro terminal, entre na pasta do aplicativo:
 
-
-
-```powershell
-
+```bash
 cd app
-
 ```
-
-
 
 Instale as dependências:
 
-
-
-```powershell
-
+```bash
 npm install
-
 ```
 
+Inicie o Expo:
 
-
-Depois execute:
-
-
-
-```powershell
-
+```bash
 npx expo start
-
 ```
 
+Após iniciar, o Expo disponibiliza um **QR Code** que pode ser utilizado para abrir o aplicativo em um dispositivo compatível com o Expo Go.
 
+Também é possível executar o aplicativo em um emulador Android.
 
-O aplicativo deve ser executado em um ambiente Android, como um emulador Android ou um celular Android compatível.
+## Comunicação entre o aplicativo e a API
 
-
-
-\## Comunicação entre o aplicativo e a API
-
-
-
-No emulador Android, o aplicativo utiliza:
-
-
+Quando o aplicativo é executado em um emulador Android, ele utiliza:
 
 ```text
-
 http://10.0.2.2:8000
-
 ```
 
+O endereço `10.0.2.2` permite que o emulador Android acesse a API executada no computador.
 
+Quando o aplicativo é executado em um dispositivo Android físico, pode ser necessário utilizar o endereço IP do computador na rede local.
 
-O endereço `10.0.2.2` permite que o emulador Android acesse a API que está sendo executada no computador.
+A API deve estar em execução para que o aplicativo consiga realizar partidas e consultar o histórico.
 
+## Funcionamento do jogo
 
+O jogador escolhe uma das opções:
 
-Se o aplicativo for executado em um celular Android físico, pode ser necessário trocar esse endereço pelo endereço IP do computador na mesma rede.
+* Pedra
+* Papel
+* Tesoura
 
+Depois, toca no botão **Jogar**.
 
+O aplicativo envia a jogada escolhida para a API por meio de uma requisição HTTP.
 
-\## Como o jogo funciona
+A API escolhe aleatoriamente a jogada do servidor, calcula o resultado oficial da rodada e salva os dados no banco de dados.
 
+As regras utilizadas são:
 
-
-O jogador escolhe:
-
-
-
-\* Pedra
-
-\* Papel
-
-\* Tesoura
-
-
-
-Depois toca no botão \*\*Jogar\*\*.
-
-
-
-O aplicativo envia a escolha para a API.
-
-
-
-A API escolhe aleatoriamente uma jogada para o servidor e calcula o resultado.
-
-
-
-As regras são:
-
-
-
-\* Pedra ganha de Tesoura.
-
-\* Tesoura ganha de Papel.
-
-\* Papel ganha de Pedra.
-
-\* Quando as duas jogadas são iguais, o resultado é empate.
-
-
+* Pedra vence Tesoura.
+* Tesoura vence Papel.
+* Papel vence Pedra.
+* Jogadas iguais resultam em empate.
 
 Os resultados utilizados pela API são:
 
+* `vitoria`
+* `derrota`
+* `empate`
 
+A API é responsável pelo cálculo oficial do resultado. O aplicativo não define nem altera o resultado recebido.
 
-\* `vitoria`
-
-\* `derrota`
-
-\* `empate`
-
-
-
-Depois de calcular o resultado, a API salva a rodada no banco de dados e devolve os dados para o aplicativo.
-
-
-
-\## Histórico e placar
-
-
-
-O aplicativo possui uma segunda tela chamada \*\*Histórico\*\*.
-
-
-
-Nessa tela são mostradas as rodadas realizadas, contendo:
-
-
-
-\* Jogada do jogador;
-
-\* Jogada do servidor;
-
-\* Resultado;
-
-\* Data e hora.
-
-
-
-As rodadas aparecem da mais recente para a mais antiga.
-
-
-
-O histórico pode ser atualizado pelo botão \*\*Atualizar histórico\*\*.
-
-
-
-O placar da tela do jogo é calculado a partir das rodadas que estão salvas na API. Assim, as informações continuam disponíveis mesmo depois de fechar e abrir o aplicativo novamente.
-
-
-
-\## API
-
-
+## API
 
 A API possui dois endpoints principais.
 
+### POST `/rodadas`
 
+Cria uma nova rodada.
 
-\### POST `/rodadas`
+A requisição deve conter somente a jogada do jogador.
 
-
-
-É utilizado para criar uma nova rodada.
-
-
-
-Exemplo de envio:
-
-
+Exemplo:
 
 ```json
-
 {
-
-&#x20; "jogada": "pedra"
-
+  "jogada": "pedra"
 }
-
 ```
 
+As jogadas aceitas são:
 
+```text
+pedra
+papel
+tesoura
+```
 
-A API escolhe a jogada do servidor, calcula o resultado, salva a rodada e retorna os dados.
+Após receber a requisição, a API:
 
+1. valida a jogada;
+2. escolhe aleatoriamente a jogada do servidor;
+3. calcula o resultado;
+4. salva a rodada no SQLite;
+5. retorna os dados da rodada criada.
 
+Em caso de sucesso, o endpoint retorna **HTTP 201**.
 
-\### GET `/rodadas`
+A resposta contém:
 
+```json
+{
+  "id": 1,
+  "jogada_jogador": "pedra",
+  "jogada_servidor": "tesoura",
+  "resultado": "vitoria",
+  "criada_em": "2026-10-04T03:25:00+00:00"
+}
+```
 
+### GET `/rodadas`
 
-É utilizado para buscar todas as rodadas salvas.
-
-
+Retorna as rodadas armazenadas no banco de dados.
 
 As rodadas são retornadas da mais recente para a mais antiga.
 
+Quando não existem rodadas cadastradas, o endpoint retorna:
 
+```json
+[]
+```
 
-\## Validação das requisições
-
-
+## Validação das requisições
 
 A API aceita somente as jogadas:
 
-
-
 ```text
-
 pedra
-
 papel
-
 tesoura
-
 ```
 
+Uma jogada inválida ou ausente é rejeitada com **HTTP 422**.
 
+A API também não permite campos adicionais na requisição.
 
-Caso seja enviada uma jogada inválida, a API retorna erro `422`.
-
-
-
-Também não é permitido enviar campos extras para tentar definir o resultado ou a jogada do servidor.
-
-
-
-Por exemplo, uma requisição como:
-
-
+Por exemplo, a seguinte requisição é inválida:
 
 ```json
-
 {
-
-&#x20; "jogada": "pedra",
-
-&#x20; "resultado": "vitoria"
-
+  "jogada": "pedra",
+  "resultado": "vitoria"
 }
-
 ```
 
-
-
-é rejeitada pela API.
-
-
-
-O mesmo acontece se alguém tentar enviar a jogada do servidor:
-
-
+Também é inválida uma tentativa de definir a jogada do servidor:
 
 ```json
-
 {
-
-&#x20; "jogada": "pedra",
-
-&#x20; "jogada\_servidor": "papel"
-
+  "jogada": "pedra",
+  "jogada_servidor": "papel"
 }
-
 ```
 
+Nesses casos, a requisição é rejeitada com **HTTP 422** e a rodada não é gravada no banco de dados.
 
+## Banco de dados
 
-Nesses casos, a API retorna `422` e não salva a rodada.
+O projeto utiliza **SQLite** para armazenar as rodadas.
 
-
-
-\## Banco de dados
-
-
-
-Foi utilizado o \*\*SQLite\*\* para armazenar as rodadas.
-
-
-
-O banco é criado automaticamente pela API e fica no arquivo:
-
-
+O banco está localizado em:
 
 ```text
-
 api/jogos.db
-
 ```
 
+Cada rodada armazenada possui:
 
+* `id`
+* `jogada_jogador`
+* `jogada_servidor`
+* `resultado`
+* `criada_em`
 
-Cada rodada salva:
+Os dados permanecem armazenados mesmo depois que a API é encerrada e iniciada novamente.
 
+O aplicativo não acessa o SQLite diretamente. Toda comunicação com o banco é realizada pela API.
 
+## Histórico e placar
 
-\* ID;
+O aplicativo possui uma tela de **Histórico**, na qual são apresentadas as rodadas realizadas.
 
-\* Jogada do jogador;
+Para cada rodada são exibidos:
 
-\* Jogada do servidor;
+* jogada do jogador;
+* jogada do servidor;
+* resultado;
+* data e hora.
 
-\* Resultado;
+As rodadas são apresentadas da mais recente para a mais antiga.
 
-\* Data e hora.
+O histórico pode ser atualizado pelo botão **Atualizar histórico**.
 
+O placar da tela principal é calculado com base nas rodadas retornadas pela API, considerando:
 
+* vitórias;
+* derrotas;
+* empates.
 
-As informações continuam salvas mesmo quando a API é desligada e iniciada novamente.
+Dessa forma, o placar e o histórico continuam disponíveis após fechar e abrir novamente o aplicativo, desde que os dados permaneçam armazenados na API.
 
+## Tratamento de erros e comunicação
 
+Durante o envio de uma jogada:
 
-O aplicativo não acessa o banco de dados diretamente. O acesso ao banco é feito somente pela API.
+* o aplicativo apresenta um estado de carregamento;
+* o botão de jogar é desabilitado durante a requisição;
+* não são permitidos envios simultâneos;
+* existe um limite de **15 segundos** para a comunicação;
+* erros HTTP ou de comunicação são informados ao usuário;
+* o aplicativo não inventa um resultado quando a resposta da API não é recebida;
+* não é realizada tentativa automática de repetição.
 
+Quando existe possibilidade de a rodada ter sido registrada na API, mas a resposta não ter chegado corretamente ao aplicativo, o usuário é orientado a consultar o histórico antes de tentar realizar uma nova jogada.
 
+Caso a criação da rodada seja confirmada, mas ocorra uma falha ao atualizar o histórico, o resultado da partida é preservado e o aplicativo informa a falha de atualização.
 
-\## Tratamento de erros
+## Persistência
 
+As rodadas são persistidas no banco de dados SQLite.
 
+A persistência permite que os dados continuem disponíveis mesmo após:
 
-Durante uma jogada, o aplicativo mostra que está carregando e impede que o usuário envie várias jogadas ao mesmo tempo.
+* encerramento da API;
+* reinicialização da API;
+* fechamento do aplicativo;
+* abertura posterior do aplicativo.
 
+O histórico e o placar são obtidos a partir dos dados armazenados pela API.
 
+## Limitações
 
-Foi definido um limite de 15 segundos para a comunicação da jogada.
+O projeto foi desenvolvido com foco nos requisitos da disciplina e não possui:
 
+* sistema de login;
+* cadastro de usuários;
+* multiplayer;
+* ranking;
+* funcionamento offline;
+* edição de rodadas;
+* exclusão de rodadas.
 
+A API precisa estar em execução para que o aplicativo possa criar novas rodadas ou consultar os dados armazenados.
 
-Caso aconteça algum problema de comunicação com a API, o aplicativo mostra uma mensagem informando o problema.
+## Referências
 
+Foram utilizadas principalmente as documentações das tecnologias empregadas no projeto:
 
+* Python
+* FastAPI
+* SQLite
+* React Native
+* Expo
+* Expo Router
 
-Quando existe possibilidade de a rodada ter sido salva mesmo com uma falha de comunicação, o aplicativo informa essa situação e orienta a consultar o histórico antes de tentar novamente.
-
-
-
-O aplicativo não inventa resultados e não faz novas tentativas automaticamente.
-
-
-
-\## Limitações
-
-
-
-Como o projeto foi desenvolvido para a avaliação, algumas funcionalidades ficaram fora do projeto:
-
-
-
-\* Não possui login;
-
-\* Não possui cadastro de usuários;
-
-\* Não possui multiplayer;
-
-\* Não possui ranking;
-
-\* Não possui funcionamento offline;
-
-\* Não possui edição ou exclusão de rodadas;
-
-\* A API precisa estar funcionando para o aplicativo realizar as operações.
-
-
-
-\## Referências
-
-
-
-Para desenvolver o projeto foram consultadas as documentações das tecnologias utilizadas, principalmente:
-
-
-
-\* Python;
-
-\* FastAPI;
-
-\* SQLite;
-
-\* React Native;
-
-\* Expo;
-
-\* Expo Router.
-
-
-
-O projeto foi desenvolvido com foco nos requisitos apresentados na prova.
-
-
-
+O desenvolvimento foi realizado considerando os requisitos propostos para a disciplina de **Programação para Dispositivos Móveis**.
